@@ -17,11 +17,8 @@ RUN npm install
 COPY src ./src
 
 RUN npm run build
-RUN ls
-COPY .env ./build/src
 
 WORKDIR ./build/src
-RUN ls
 
 EXPOSE 8080
 CMD node app.js
