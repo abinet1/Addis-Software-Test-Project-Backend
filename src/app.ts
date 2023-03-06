@@ -19,6 +19,7 @@ const mongo_url:string|undefined = process.env.MONGODB_URL;
 
 const startServer = async () => {
     try {
+        console.log(mongo_url!)
         await mongoose.connect(mongo_url!);
         console.log("Connected to db ✅");
         app.listen(PORT, ()=>{
