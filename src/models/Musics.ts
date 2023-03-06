@@ -8,7 +8,9 @@ export interface Music{
     genre: string;
     image: string; 
 }
-const url = "https://cdn.pixabay.com/photo/2022/09/07/17/26/vintage-pocket-watch-7439233_960_720.jpg"
+
+const url="https://cdn.pixabay.com/photo/2016/09/08/21/09/piano-1655558_960_720.jpg"
+
 
 const MusicSchema = new Schema<Music>({
     title: {type: String, required: true},
