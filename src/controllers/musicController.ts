@@ -16,60 +16,65 @@ function param(query){
 }
 
 export const allMusic =async (req: Request, res: Response) => {
-    const musics = await Musics.find();
     try {
+        const musics = await Musics.find();
         return res.status(200).json(musics);
     } catch (error) {
-        return res.status(500).json({err: error})
+        return res.status(500)
     }
 }
 
 export const allMusics =async (req: Request, res: Response) => {
-    const filter = param(req.query);
-    const musics = await Musics.find(filter);
     try {
+        const filter = param(req.query);
+        const musics = await Musics.find(filter);
         return res.status(200).json(musics);
     } catch (error) {
-        return res.status(500).json({err: error})
+        return res.status(500)
     }
 }
 
 export const addMusic=async (req: Request,res: Response)=>{
-    const musicTocreate = await Musics.create(req.body);
-    const musics = await Musics.find();
+
     try {
+        const musicTocreate = await Musics.create(req.body);
+        const musics = await Musics.find();
         return res.status(201).json(musics);
     }catch(error){
-        return res.send(500).json({msg:"couldn't create music"})
+        return res.sendStatus(500)
     }
 }
 
 export const detailMusic=async(req: Request,res: Response)=>{
-    const {id} = req.params;
-    const singleMusic = await Musics.findById(id);
+    
     try {
+        const {id} = req.params;
+        const singleMusic = await Musics.findById(id);
         return res.status(201).json(singleMusic);
     }catch(error){
-        return res.send(500).json({msg:"couldn't updating music"})
+        return res.sendStatus(500)
     }
 }
 
 export const updateMusic=async (req: Request,res: Response)=>{
-    const {id} =req.params;
-    const musicToUpdate = await Musics.findByIdAndUpdate(id, req.body, {new:true});
     try {
+        const {id} =req.params;
+        const musicToUpdate = await Musics.findByIdAndUpdate(id, req.body, {new:true});
+    
         return res.status(201).json(musicToUpdate);
     }catch(error){
-        return res.send(500).json({msg:"couldn't updating music"})
+        return res.sendStatus(500)
     }
 }
 
 export const deleteMusic=async (req: Request,res: Response)=>{
-    const { id } = req.params;
-    await Musics.findByIdAndDelete(id);
     try {
-        return res.status(201).json({msg:"deleted successfully"});
+        const { id } = req.params;
+        await Musics.findByIdAndDelete(id);
+    
+        const musics = await Musics.find();
+        return res.status(201).json(musics);
     }catch(error){
-        return res.send(500).json({msg:"couldn't create music"})
+        return res.sendStatus(500)
     }
 }
